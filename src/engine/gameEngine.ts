@@ -36,6 +36,34 @@ export function collectApricorn(state: GameState): GameState {
     };
 }
 
+export function makePokeball(state: GameState): GameState {
+    const APRICORN_COST = 5;
+
+    if (state.apricorns < APRICORN_COST) {
+        return state;
+    }
+
+    return {
+        ...state,
+        apricorns: state.apricorns - APRICORN_COST,
+        pokeballs: state.pokeballs + 1,
+    };
+}
+
+export function sellPokeball(state: GameState): GameState {
+    const SELL_PRICE = 2;
+
+    if (state.pokeballs < 1) {
+        return state;
+    }
+
+    return {
+        ...state,
+        pokeballs: state.pokeballs - 1,
+        pokedollars: state.pokedollars + SELL_PRICE,
+    };
+}
+
 export function tick(state: GameState, deltaSeconds: number): GameState {
     if (deltaSeconds <= 0) {
       return state;
